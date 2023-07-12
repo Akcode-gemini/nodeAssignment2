@@ -82,7 +82,7 @@
       </div>
       <div class="modal-footer">
         <button (click)="modal.close()" class="btn btn-secondary" >Cancel</button>
-        <button (click)="share();modal.close()"class="btn btn-primary">Submit</button>
+        <button (click)="share();modal.close()"class="btn btn-primary"[routerLink]="['../view']">Submit</button>
       </div>
     </ng-template>
     <br>
