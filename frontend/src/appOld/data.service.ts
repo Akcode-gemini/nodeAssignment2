@@ -4,6 +4,8 @@ import { Injectable } from '@angular/core';
   providedIn: 'root'
 })
 export class DataService {
-  itemID = '';
+  shareData:any[]=[];
+  itemId:string="";
  constructor() { }
 }
+

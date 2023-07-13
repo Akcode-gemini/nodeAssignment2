@@ -5,6 +5,7 @@ import {
   Validators,
 } from '@angular/forms';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { DataService } from 'src/app/data.service';
 import { HttpClient } from '@angular/common/http';
 @Component({
   selector: 'app-create',
@@ -21,9 +22,10 @@ export class CreateComponent implements OnInit {
 
   constructor(
     private modalService: NgbModal,
+    private dataService: DataService,
     private http: HttpClient
   ) {
-
+    this.allData = this.dataService.shareData;
   }
   ngOnInit() {
     this.createForm = new FormGroup({
@@ -57,6 +59,7 @@ export class CreateComponent implements OnInit {
       .substring(file.name.lastIndexOf('.'))
       .toLowerCase();
     if (!allowedExtensions.includes(fileExtension)) {
+      // Invalid file extension, handle the error
       this.t =
         'Invalid file extension. Please select a .jpg, .jpeg, or .png file.';
       this.createForm.value.proPic = '';
@@ -71,9 +74,8 @@ export class CreateComponent implements OnInit {
       reader.readAsDataURL(file);
     }
 
+    // console.log('Base64String', this.base64String);
   }
-
-
 
 
   display() {
@@ -86,7 +88,12 @@ export class CreateComponent implements OnInit {
     });
   }
   share() {
+    this.tmpArr.push(this.createForm.value);
+    this.tmpArr.push(this.base64String);
+    this.allData.push(this.tmpArr);
+    this.dataService.shareData = this.allData;
     console.log('All Data', this.createForm.value);
+    console.log(this.dataService.shareData);
     const postName = this.createForm.value.fullName;
     const postGender = this.createForm.value.gender;
     const postEmail = this.createForm.value.email;

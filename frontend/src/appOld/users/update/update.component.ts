@@ -16,16 +16,16 @@ export class UpdateComponent implements OnInit {
   constructor(private http: HttpClient, private dataService: DataService) {}
 
   ngOnInit() {
-    this.itemID = this.dataService.itemID;
+    this.itemID = this.dataService.itemId;
     console.log(this.itemID);
 
+    // Make the API call to fetch the user data for update
     this.http
       .get<any>(
         `http://localhost:9000/record/get-one-for-update/${this.itemID}`
       )
       .subscribe(
         (data) => {
-          console.log('User Data:', data);
           this.createForm = new FormGroup({
             postName: new FormControl(data.postName, [
               Validators.required,
@@ -91,19 +91,18 @@ export class UpdateComponent implements OnInit {
       const reader = new FileReader();
       reader.onloadend = () => {
         this.base64String = reader.result;
-        console.log('New Updated Base64 String:', this.base64String);
+        console.log('Base64 String:', this.base64String);
       };
       reader.readAsDataURL(file);
     }
   }
 
   handleUpdateUser() {
-
-
-    if(this.base64String){
-    this.createForm.value.postProPic = this.base64String;
-    }
-
+    console.log('Update Form:', this.createForm.value);
+  if(this.base64String){
+    this.createForm.value.postProPic=this.base64String
+  }
+    // Make the API call to update the user data
     this.http
       .put<any>(
         `http://localhost:9000/record/update/${this.itemID}`,
@@ -111,20 +110,20 @@ export class UpdateComponent implements OnInit {
       )
       .subscribe(
         (data) => {
-          console.log('Update Successful');
+          console.log('Update Successful')
           console.log('Update Response:', data);
           this.updatedTechnology = data;
+
         },
         (error) => {
           console.log('Error updating user data:', error);
         }
       );
 
-    }
-
-    reloadAfterDelay() {
-      setTimeout(() => {
-        location.reload();
-      }, 700);
-    }
+  }
+  reloadAfterDelay(){
+    setTimeout(()=>{
+      location.reload();//reload the current page
+    },1000)
+  }
 }

@@ -25,7 +25,7 @@ export class ViewComponent implements OnInit {
   }
   setID(id: string) {
     this.itemID = id;
-    this.dataService.itemID = this.itemID;
+    this.dataService.itemId = this.itemID;
     console.log(this.itemID);
   }
   getTimeStamp(): number {
@@ -38,7 +38,7 @@ export class ViewComponent implements OnInit {
     });
   }
   getAllData() {
-    this.http.get<any[]>('http://localhost:9000/record/all-user').subscribe(
+    this.http.get<any[]>('http://localhost:8000/record/all-user').subscribe(
       (data) => {
         this.allData = data;
         console.log(this.allData);
@@ -51,7 +51,7 @@ export class ViewComponent implements OnInit {
   }
 
   deleteItem(id: string) {
-    this.http.delete(`http://localhost:9000/record/delete/${id}`).subscribe(
+    this.http.delete(`http://localhost:8000/record/delete/${id}`).subscribe(
       () => {
         console.log('Item deleted successfully');
         this.getAllData();

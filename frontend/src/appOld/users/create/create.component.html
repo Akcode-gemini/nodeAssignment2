@@ -14,7 +14,7 @@
     <div class="selectGender ">
       <label for="genderCheck">Gender<b class="text-danger">*</b></label>&nbsp;
     <div class="form-check">
-      <input type="radio" class="form-check-input" id="male" formControlName="gender" value="Male" checked>
+      <input type="radio" class="form-check-input" id="male" formControlName="gender" value="male" checked>
       <label class="form-check-label" for="male">Male</label>
     </div>
     <div class="mb-3">
@@ -55,7 +55,6 @@
     </select>
     <span *ngIf="createForm.controls['category'].invalid &&createForm.controls['category'].touched" class="text-danger">Please choose category</span>
     </div>
-
     <br>
     <!--Profile Picture-->
 
@@ -79,17 +78,11 @@
          <div><b>Mobile</b>:{{createForm.value.mobile}}</div>
          <div><b>Gender</b>:{{createForm.value.gender}}</div>
          <div><b>Category</b>:{{createForm.value.category}}</div>
-         <div><b>Technologies: </b>
-          <ul>
-            <li *ngFor="let tech of createForm.value.technologies">{{tech}}</li>
-          </ul>
-        </div>
          <div><b>Profile Picture</b>:{{createForm.value.proPic}}</div>
-         <div><b>Action</b></div>
       </div>
       <div class="modal-footer">
         <button (click)="modal.close()" class="btn btn-secondary" >Cancel</button>
-        <button (click)="share();modal.close()" [routerLink]="['../view']" class="btn btn-primary">Submit</button>
+        <button (click)="share();modal.close()"class="btn btn-primary"[routerLink]="['../view']">Submit</button>
       </div>
     </ng-template>
     <br>

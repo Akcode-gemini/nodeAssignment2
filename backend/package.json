@@ -9,7 +9,7 @@
     "dev": "nodemon mainServer.js"
   },
   "keywords": [],
-  "author": "",
+  "author": "Aaliya",
   "license": "ISC",
   "dependencies": {
     "cors": "^2.8.5",
